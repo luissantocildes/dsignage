@@ -192,7 +192,7 @@ detener() {
 
 if [ ! -f $FOLDER/dvds.conf ] ; then
     cat <<FIN > $FOLDER/dvds.conf
-SERVIDOR=dvd.datacontrol.es
+SERVIDOR=srv.example.com
 PUERTO=80
 PROXY=
 ID=

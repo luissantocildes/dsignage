@@ -81,7 +81,7 @@ $bbdd->Disconnect();
 
 	function escogePlaylist(listado) {
 	    if (listado.selectedIndex != -1) {
-		aux = loadXMLDoc('http://dvd.datacontrol.es/api/?f=playlist&id='+listado.options[listado.selectedIndex].value, function (a) {mostrarPlaylist(a);});
+		aux = loadXMLDoc('http://srv.example.com/api/?f=playlist&id='+listado.options[listado.selectedIndex].value, function (a) {mostrarPlaylist(a);});
 	    }
 	}
 
