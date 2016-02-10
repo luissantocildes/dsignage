@@ -27,7 +27,7 @@ $bbdd->Disconnect();
 </div>
 <div id="panel-contenido">
     <div id="contenido">
-    Hola Caracola
+	    Hello World!
     </div>
 </div>
 </body>
