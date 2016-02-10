@@ -27,7 +27,9 @@ $bbdd->Disconnect();
 </div>
 <div id="panel-contenido">
     <div id="contenido">
-	    Hello World!
+    <script>
+	document.location = 'http://srv.example.com/media.php';
+    </script>
     </div>
 </div>
 </body>

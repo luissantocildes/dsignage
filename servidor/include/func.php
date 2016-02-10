@@ -70,6 +70,12 @@ function existe_medio ($bbdd, $nombre) {
     return count($medios) > 0;
 }
 
+function existe_medio_id ($bbdd, $id) {
+    $sql = "SELECT id FROM medios WHERE id = $id";
+    $medios = $bbdd->query($sql);
+    return count($medios) > 0;
+}
+
 function borra_medio ($bbdd, $id) {
     $sql = "DELETE FROM playlist WHERE idMedio = $id";
     $ok1 = $bbdd->query($sql);

@@ -46,14 +46,23 @@ if (!pcntl_signal (SIGUSR1, "signal_handler"))
 // Conecta con la base de datos
 $bbdd = new SQLite3('/opt/dvds/dvds.db');
 
-while (!$terminar) {
-    // Obtiene los ficheros que se han de reproducir
-    $resultado = $bbdd->query ("select * from playlist where start <= datetime('now') and (stop is null or stop >= datetime('now', 'localtime'))");
-    while (!$terminar && $fichero = $resultado->fetchArray(SQLITE3_ASSOC)) {
-	print_r ($terminar);
-	$cmd = $omxplayer . ' --win 0,0,200,200 ' . $mediaFolder . $fichero['file'];
-	system ($cmd);
+// Determina si hay ficheros para reproducir
+$resultado = $bbdd->query ("select * from playlist order by id");
+if ($resultado->fetchArray(SQLITE3_ASSOC)) {
+
+    while (!$terminar) {
+	// Obtiene los ficheros que se han de reproducir
+//	$resultado = $bbdd->query ("select * from playlist where start <= datetime('now') and (stop is null or stop >= datetime('now', 'localtime'))");
+	$resultado = $bbdd->query ("select * from playlist order by id");
+	while (!$terminar && $fichero = $resultado->fetchArray(SQLITE3_ASSOC)) {
+	    print_r ($terminar);
+//	    $cmd = $omxplayer . ' --win 0,0,200,200 ' . $mediaFolder . $fichero['file'];
+	    $cmd = $omxplayer . ' ' . $mediaFolder . $fichero['file'];
+	    system ($cmd);
+	}
     }
+} else {
+    echo "No se encuentran archivos para reproducir.";
 }
 
 // Elimina el archivo de bloqueo

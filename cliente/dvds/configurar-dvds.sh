@@ -109,7 +109,7 @@ registrar() {
 	read cosa
 	return 1
     fi
-    wget -O /tmp/salida.txt "http://$SERVIDOR:$PUERTO/api/?f=register&nombre=\"$NOMBRE\"&ubicacion=\"$UBICACION\"&comentario=\"$COMENTARIO\""
+    wget -O /tmp/salida.txt "http://$SERVIDOR:$PUERTO/api/?f=register&nombre=$NOMBRE&ubicacion=$UBICACION&comentario=$COMENTARIO"
 
     if (( $? > 0 )) ; then
 	echo "Ha ocurrido un error al intentar registrar el cliente... Inténtelo más tarde"
@@ -129,8 +129,22 @@ registrar() {
 }
 
 ########
-# Borra los archivos descargados
+# Descarga los nuevos vídeos
 ########
+actualizar() {
+    // Descarga los archivos nuevos en la carpeta download
+    /usr/bin/php $FOLDER/actualiza.php > /dev/null
+}
+
+#########
+# Borra los vídeos descargados
+#########
+borrar() {
+	echo "Deteniendo DVDS..."
+	detener();
+	rm -f $FOLDER/media/*
+	sqlite3
+}
 
 ########
 # Inicia el script de reproduccion
